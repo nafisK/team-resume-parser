@@ -5,6 +5,8 @@ const pdfParse = require('pdf-parse')
 
 const app = express()
 
+require('./database')();
+
 // default options
 app.use(fileUpload())
 
