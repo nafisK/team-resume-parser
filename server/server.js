@@ -2,6 +2,7 @@ const e = require('express')
 const express = require('express')
 const fileUpload = require('express-fileupload')
 const pdfParse = require('pdf-parse')
+const Resume = require('./models/resume')
 
 const app = express()
 
@@ -9,6 +10,7 @@ require('./database')();
 
 // default options
 app.use(fileUpload())
+app.use(express.json())
 
 // checking for working server
 app.get('/', function (req, res) {
@@ -69,7 +71,14 @@ app.post('/upload', function (req, res) {
         return element !== '' && element !== '.' && element !== '·'
       })
 
-      // TODO: ADD MONGO DB CODE HERE
+      // send pdf data to database
+      const resume = new Resume({
+        filename: sampleFile.name,
+        content: pdfArr
+      })
+      resume.save().then(
+        res.send()
+      )
 
       // UNCOMMENT || COMMENT FOR TESTING
       console.log(pdfArr)
