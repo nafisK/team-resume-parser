@@ -33,7 +33,7 @@ app.post('/upload', function (req, res) {
 
   // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
   sampleFile = req.files.sampleFile
-  console.log(sampleFile)
+  //console.log(sampleFile)
   uploadPath = __dirname + '/files/' + sampleFile.name
 
   // Use the mv() method to place the file somewhere on your server
@@ -83,8 +83,6 @@ app.post('/upload', function (req, res) {
       // UNCOMMENT || COMMENT FOR TESTING
       console.log(pdfArr)
     })
-
-    res.send('File uploaded!')
   })
 })
 
