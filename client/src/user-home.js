@@ -1,22 +1,23 @@
-import React from "react"
-import { storage, db } from "./firebase"
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"
-import { addDoc, collection } from "firebase/firestore"
-import { useState } from "react"
+import { React, useEffect } from 'react'
+import { storage, db } from './firebase'
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
+import { addDoc, collection } from 'firebase/firestore'
+import { useState } from 'react'
 import { Button, Card, Alert } from 'react-bootstrap'
-import { v4 as uuidv4 } from "uuid"
+import { v4 as uuidv4 } from 'uuid'
+import axios from 'axios'
 
 export default function Home() {
   const [data, setData] = useState({
-    name: "",
-    email: "",
-    number: "",
+    name: '',
+    email: '',
+    number: '',
     file: null,
-    resumeString: "",
+    resumeString: '',
     created: new Date(),
   })
   const [submissionAlert, setSubmissionAlert] = useState(false)
-  const resumeCollectionRef = collection(db, "resumes")
+  const resumeCollectionRef = collection(db, 'resumes')
 
   const handleClick = () => {
     setSubmissionAlert(!submissionAlert)
@@ -32,32 +33,26 @@ export default function Home() {
     const newData = { ...data }
     const file = event.target.files[0]
 
-    const arr = [
-      "",
-      "Tanvi",
-      "Rahman",
-      "tanvi.rahman@nyu.edu",
-      "",
-    ]
+    const arr = ['', 'Tanvi', 'Rahman', 'tanvi.rahman@nyu.edu', '']
 
     // setting actual file
-    newData["file"] = file
-    newData["resumeString"] = arr
+    newData['file'] = file
+    newData['resumeString'] = arr
 
     setData(newData)
     console.log(newData)
   }
 
   const handleSubmit = async e => {
-    var fileUrl = ""
+    var fileUrl = ''
     e.preventDefault()
     const storageRef = ref(storage, `/resumes/${uuidv4()}`)
     const uploadTask = uploadBytesResumable(storageRef, data.file)
     uploadTask.on(
-      "state_changed",
+      'state_changed',
       snapshot => {
         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        console.log("Upload is " + progress + "% done")
+        console.log('Upload is ' + progress + '% done')
       },
       error => {
         console.log(error)
@@ -83,13 +78,27 @@ export default function Home() {
     })
   }
 
+  
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/resumes')
+      .then(res => {
+        console.log(res)
+        
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
+
+
+
+
   return (
     <div className='w-full my-32'>
       <div className='max-w-[1240px] mx-auto'>
         <div className='text-center'>
-          <h2 className='text-5xl font-bold'>
-            Upload your resume!
-          </h2>
+          <h2 className='text-5xl font-bold'>Upload your resume!</h2>
         </div>
 
         <div className='py-9 md:grid-cols-3 gap-1 px-2 text-center'>

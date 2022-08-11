@@ -1,17 +1,29 @@
 const e = require('express')
 const express = require('express')
+var cors = require('cors')
 const fileUpload = require('express-fileupload')
 const pdfParse = require('pdf-parse')
+const Resume = require('./models/resume')
 
 const app = express()
+app.use(cors())
+
+require('./database')()
 
 // default options
 app.use(fileUpload())
+app.use(express.json())
 
 // checking for working server
 app.get('/', function (req, res) {
   res.send('<h1>Hello World</h1>')
 })
+
+// // test server
+// app.get('/resumes', function (req, res) {
+//   return 
+// })
+
 
 // handles upload of ONE file
 app.post('/upload', function (req, res) {
@@ -29,7 +41,7 @@ app.post('/upload', function (req, res) {
 
   // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
   sampleFile = req.files.sampleFile
-  console.log(sampleFile)
+  //console.log(sampleFile)
   uploadPath = __dirname + '/files/' + sampleFile.name
 
   // Use the mv() method to place the file somewhere on your server
@@ -67,13 +79,16 @@ app.post('/upload', function (req, res) {
         return element !== '' && element !== '.' && element !== '·'
       })
 
-      // TODO: ADD MONGO DB CODE HERE
+      // send pdf data to database
+      const resume = new Resume({
+        filename: sampleFile.name,
+        content: pdfArr,
+      })
+      resume.save().then(res.send())
 
       // UNCOMMENT || COMMENT FOR TESTING
       console.log(pdfArr)
     })
-
-    res.send('File uploaded!')
   })
 })
 
