@@ -7,6 +7,8 @@ const Resume = require('./models/resume')
 const app = express()
 app.use(cors())
 
+app.use(express.json())
+
 require('./database')()
 
 // default options
@@ -24,14 +26,14 @@ app.get('/resumes', async function (req, res) {
     const resumes = await Resume.find()
     res.send(resumes)
   } catch (err) {
-      res.send({ message: err })
+    res.send({ message: err })
   }
 })
 
 // get filtered search results by keyword
 app.get('/resumes/:keyword', async function (req, res) {
   try {
-    const resumes = await Resume.find({content: req.params.keyword})
+    const resumes = await Resume.find({ content: req.params.keyword })
     res.send(resumes)
   } catch (err) {
     res.send({ message: err })
@@ -43,6 +45,8 @@ app.post('/upload', function (req, res) {
   let sampleFile
   let uploadPath
   let pdfArr = []
+
+  
 
   // rejex to remove all punctuation except for single quote
   const regex = /[!"#$%&()*+,-./:;<=>?@[\]^_`{|}~]/g
@@ -95,13 +99,17 @@ app.post('/upload', function (req, res) {
       // send pdf data to database
       const resume = new Resume({
         filename: sampleFile.name,
-        content: pdfArr
+        content: pdfArr,
+        author: req.body.name,
+        email: req.body.email,
       })
       resume.save().then(res.send())
 
       // UNCOMMENT || COMMENT FOR TESTING
       // console.log(pdfArr)
     })
+
+    res.send('File uploaded!')
   })
 })
 
