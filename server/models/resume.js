@@ -3,7 +3,10 @@ const mongoose = require('mongoose')
 const ResumeSchema = mongoose.Schema({
     filename: String,
     author: String,
-    appliedOn: Date,
+    appliedOn: {
+        type: Date,
+        default: Date.now
+    },
     content: [String]
 })
 
