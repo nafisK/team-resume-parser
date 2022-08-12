@@ -1,4 +1,3 @@
-const e = require('express')
 const express = require('express')
 var cors = require('cors')
 const fileUpload = require('express-fileupload')
@@ -19,11 +18,25 @@ app.get('/', function (req, res) {
   res.send('<h1>Hello World</h1>')
 })
 
-// // test server
-// app.get('/resumes', function (req, res) {
-//   return 
-// })
+// get all resumes
+app.get('/resumes', async function (req, res) {
+  try {
+    const resumes = await Resume.find()
+    res.send(resumes)
+  } catch (err) {
+      res.send({ message: err })
+  }
+})
 
+// get filtered search results by keyword
+app.get('/resumes/:keyword', async function (req, res) {
+  try {
+    const resumes = await Resume.find({content: req.params.keyword})
+    res.send(resumes)
+  } catch (err) {
+    res.send({ message: err })
+  }
+})
 
 // handles upload of ONE file
 app.post('/upload', function (req, res) {
@@ -82,12 +95,12 @@ app.post('/upload', function (req, res) {
       // send pdf data to database
       const resume = new Resume({
         filename: sampleFile.name,
-        content: pdfArr,
+        content: pdfArr
       })
       resume.save().then(res.send())
 
       // UNCOMMENT || COMMENT FOR TESTING
-      console.log(pdfArr)
+      // console.log(pdfArr)
     })
   })
 })
