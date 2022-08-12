@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect, useContext} from 'react'
 import AuthContext from './context/AuthProvider';
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const LOGIN_URL = '/auth';
 
@@ -13,6 +14,8 @@ const Login = () => {
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
+    const history = useNavigate();
+
 
     useEffect(() => {
         userRef.current.focus();
@@ -30,13 +33,7 @@ const Login = () => {
     return (
         <>
             {success ? ( 
-                <section>
-                    <h1>You are logged in!</h1>
-                    <br/>
-                    <p>
-                        <a href="home">Go to Home</a>
-                    </p>
-                </section>
+                history("/admin")
             ) : (
                 <section>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
@@ -62,12 +59,16 @@ const Login = () => {
                             required 
                         />
 
-                        <button>Sign In</button>
+                        <button disabled={!user || !pwd  ? true : false} >Sign In</button>
                     </form>
                     <p>
                         Need an Account?<br/>
-                        {/*router link*/}
                         <a href="/register">Sign Up</a>
+                    </p>
+                    <br/>
+                    <p>
+                        Looking for a job?<br/>
+                        <a href="/">Apply Now</a>
                     </p>
                 </section>
             )}

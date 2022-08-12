@@ -6,8 +6,10 @@ import { useState } from 'react'
 import { Button, Card, Alert } from 'react-bootstrap'
 import { v4 as uuidv4 } from 'uuid'
 import axios from 'axios'
+import { faAlignJustify } from '@fortawesome/free-solid-svg-icons'
 
-export default function Home() {
+
+export default function User() {
   const [data, setData] = useState({
     name: '',
     email: '',
@@ -98,11 +100,11 @@ export default function Home() {
     <div className='w-full my-32'>
       <div className='max-w-[1240px] mx-auto'>
         <div className='text-center'>
-          <h2 className='text-5xl font-bold'>Upload your resume!</h2>
+          <h1 className='text-5xl font-bold'>Upload your resume!</h1>
         </div>
 
         <div className='py-9 md:grid-cols-3 gap-1 px-2 text-center'>
-          <div className='border p-10 rounded-xl shadow-xl'>
+          <div className='border p-10 rounded-xl shadow-xl text-center'>
             <form onSubmit={e => handleSubmit(e)}>
               <div className='bg-white px-6 py-8 rounded shadow-md text-black w-full'>
                 <input
@@ -112,7 +114,7 @@ export default function Home() {
                   placeholder='Full Name'
                   id='name'
                   onChange={e => handleForm(e)}
-                />
+                /><br/>
                 <input
                   required
                   type='text'
@@ -120,7 +122,7 @@ export default function Home() {
                   id='email'
                   placeholder='Email'
                   onChange={e => handleForm(e)}
-                />
+                /><br/>
                 <input
                   required
                   type='text'
@@ -128,7 +130,8 @@ export default function Home() {
                   id='number'
                   placeholder='Phone Number'
                   onChange={e => handleForm(e)}
-                />
+                /><br/><br/>
+                Attach Resume. <br/>
                 <input
                   required
                   className='form-control block w-full px-6 py-3 mb-4 text-base font-normal text-gray-700 bg-white bg-clip-padding 
@@ -137,7 +140,7 @@ export default function Home() {
                   type='file'
                   id='file'
                   onChange={e => handleFile(e)}
-                />
+                /><br/>
                 <button
                   type='submit'
                   className='w-full text-indigo-600 text-center py-3 rounded bg-green  hover:bg-green-dark focus:outline-none my-1'
@@ -150,10 +153,14 @@ export default function Home() {
                     role='alert'
                   >
                     <span className='font-bold'>
-                      Resume successfully uploaded.
+                      Your resume has been received.<br/>
+                      A recruiter will contact you shortly...
                     </span>
                   </div>
                 )}
+                <br/><br/>
+                Looking for employees?<br/>
+                <a href='login'>Recruiter Login</a>
               </div>
             </form>
           </div>
