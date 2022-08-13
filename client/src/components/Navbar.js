@@ -26,7 +26,7 @@ function Navbar() {
           >
             Administrator Login
           </a>
-          <a to='/register'>
+          <a href='/register'>
             <button className='px-8 py-3 bg-[#424B5A] text-white rounded-2xl'>
               Sign Up
             </button>
