@@ -2,7 +2,10 @@ const express = require('express')
 var cors = require('cors')
 const fileUpload = require('express-fileupload')
 const pdfParse = require('pdf-parse')
+const bcrypt = require('bcrypt')
+
 const Resume = require('./models/resume')
+const User = require('./models/user')
 
 const app = express()
 app.use(cors())
@@ -13,7 +16,6 @@ require('./database')()
 
 // default options
 app.use(fileUpload())
-app.use(express.json())
 
 // checking for working server
 app.get('/', function (req, res) {
@@ -40,15 +42,45 @@ app.get('/resumes/:keyword', async function (req, res) {
   }
 })
 
+// user signup
+app.post('/signup', async function (req, res) {
+  try {
+    const hashedPw = await bcrypt.hash(req.body.password, 10)
+    const user = new User({
+      email: req.body.email,
+      password: hashedPw
+    })
+    res.send(await user.save())
+  } catch (err) {
+    res.send({ message: err })
+  }
+})
+
+// user login
+app.get('/login', async function (req, res) {
+  try {
+    const user = await User.findOne({ email: req.body.email })
+    if (user) {
+      if (await bcrypt.compare(req.body.password, user.password)) {
+        res.send({ message: "Login successful" })
+      } else {
+        res.send({ message: "Incorrect password" })
+      }
+    } else {
+      res.send({ message: "Email does not exist" })
+    }
+  } catch (err) {
+    res.send({ message: err })
+  }
+})
+
 // handles upload of ONE file
 app.post('/upload', function (req, res) {
   let sampleFile
   let uploadPath
   let pdfArr = []
 
-  
-
-  // rejex to remove all punctuation except for single quote
+  // regex to remove all punctuation except for single quote
   const regex = /[!"#$%&()*+,-./:;<=>?@[\]^_`{|}~]/g
 
   // checks if no file was uploaded
