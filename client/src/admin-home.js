@@ -1,4 +1,5 @@
 import React from 'react'
+<<<<<<< Updated upstream:client/src/admin-home.js
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Table from './Table'
@@ -21,6 +22,11 @@ export default function Admin() {
     return data.filter((item)=>keys.some(key=>item[key].toLowerCase().includes(query)));
   }
 
+=======
+import Table from '../Table'
+
+export default function Admin() {
+>>>>>>> Stashed changes:client/src/pages/tanvi-Admin.js
   return (
     <div className="app">
       <input type="text" 
