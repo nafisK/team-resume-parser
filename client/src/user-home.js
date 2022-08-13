@@ -19,7 +19,11 @@ export default function User() {
     created: new Date(),
   })
   const [submissionAlert, setSubmissionAlert] = useState(false)
+<<<<<<< Updated upstream
   const resumeCollectionRef = collection(db, 'resumes')
+=======
+  const [file, setFile] = useState(null)
+>>>>>>> Stashed changes
 
   const handleClick = () => {
     setSubmissionAlert(!submissionAlert)
@@ -33,7 +37,7 @@ export default function User() {
 
   const handleFile = event => {
     const newData = { ...data }
-    const file = event.target.files[0]
+    file = event.target.files[0]
 
     const arr = ['', 'Tanvi', 'Rahman', 'tanvi.rahman@nyu.edu', '']
 
@@ -42,7 +46,7 @@ export default function User() {
     newData['resumeString'] = arr
 
     setData(newData)
-    console.log(newData)
+    console.log(data)
   }
 
   const handleSubmit = async e => {
@@ -95,7 +99,10 @@ export default function User() {
 
 
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
   return (
     <div className='w-full my-32'>
       <div className='max-w-[1240px] mx-auto'>
