@@ -1,24 +1,9 @@
-import { collection, getDocs } from "firebase/firestore"
-import { React, useState, useEffect } from "react"
-import { db } from "./firebase"
-import TableList from "./TableList"
+import { React, useState, useEffect } from 'react'
+import TableList from './TableList'
 
 export default function Table() {
   const [data, setResumes] = useState([])
-  const [searchTerm, setSearchTerm] = useState("")
-  const usersCollectionRef = collection(db, "resumes")
-
-  useEffect(() => {
-    const getResumes = async () => {
-      var data = await getDocs(usersCollectionRef)
-
-      setResumes(data.docs.map(docs => ({ ...docs.data(), id: docs.id })))
-    }
-
-    getResumes()
-
-    console.log(data)
-  }, [])
+  const [searchTerm, setSearchTerm] = useState('')
 
   return (
     <div className='container flex justify-center mx-auto '>
@@ -59,7 +44,7 @@ export default function Table() {
               <tbody className='bg-white'>
                 {data
                   .filter(val => {
-                    if (searchTerm === "") {
+                    if (searchTerm === '') {
                       return val
                     } else if (val.resumeString.includes(searchTerm)) {
                       return val
