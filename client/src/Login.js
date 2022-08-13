@@ -1,9 +1,20 @@
 import { useRef, useState, useEffect, useContext} from 'react'
+<<<<<<< Updated upstream
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
+=======
+import AuthContext from './context/AuthProvider';
+import React from 'react'
+import { useNavigate } from 'react-router-dom';
+
+const LOGIN_URL = '/auth';
+
+const Login = () => {
+    const { setAuth } = useContext(AuthContext);
+>>>>>>> Stashed changes
     const userRef = useRef();
     const errRef = useRef();
 
