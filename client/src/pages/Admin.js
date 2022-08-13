@@ -1,12 +1,12 @@
 import React from 'react'
-import Table from '../Table'
+import AdminSidebar from '../components/AdminSideBar'
+import AdminBody from '../components/AdminBody'
 
-export default function Admin() {
+export default function Sidebar() {
   return (
-    <div className='flex flex-col h-screen justify-between'>
-      <div className='mb-auto h-10 mt-40'>
-        <Table />
-      </div>
+    <div className='flex'>
+      <AdminSidebar />
+      <AdminBody />
     </div>
   )
 }

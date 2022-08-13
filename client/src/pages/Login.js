@@ -1,20 +1,31 @@
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useRef, useState, useEffect, useContext } from 'react'
 import { MailIcon } from '@heroicons/react/outline'
 import { LockClosedIcon } from '@heroicons/react/solid'
-import React from 'react'
+import axios from 'axios'
 
 const Login = () => {
-  const userRef = useRef()
-  const errRef = useRef()
-
-  const [user, setUser] = useState('')
-  const [pwd, setPwd] = useState('')
-  const [errMsg, setErrMsg] = useState('')
-  const [success, setSuccess] = useState(false)
+  const navigate = useNavigate()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const handleSubmit = async e => {
     e.preventDefault()
-    setSuccess(true)
+    axios
+      .get('http://localhost:3001/login', {
+        params: {
+          email: email,
+          password: password,
+        },
+      })
+      .then(res => {
+        console.log(res)
+        navigate('/admin')
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   return (
@@ -25,7 +36,7 @@ const Login = () => {
             <h2 className='text-5xl font-bold text-[#424B5A]'>Welcome Back!</h2>
             <h4 className='text-[#424B5A] mt-4'>
               Sign in to keep track of all your applicants!
-            </h4>   
+            </h4>
           </div>
 
           <div className='py-9 md:grid-cols-3 gap-1 px-2 text-center'>
@@ -38,7 +49,7 @@ const Login = () => {
                   className='w-full p-3 ml-3 rounded-3xl pl-5'
                   placeholder='Email Address'
                   id='email'
-                  onChange={e => console.log(e.target.value)}
+                  onChange={e => setEmail(e.target.value)}
                 />
               </div>
 
@@ -50,17 +61,15 @@ const Login = () => {
                   className='w-full p-3 ml-3 rounded-3xl pl-5'
                   placeholder='Password'
                   id='password'
-                  onChange={e => console.log(e.target.value)}
+                  onChange={e => setPassword(e.target.value)}
                 />
               </div>
-              <a href='/admin'>
-                <button
-                  type='submit'
-                  className='text-white bg-[#707FDD] w-full text-center py-3 rounded-2xl  my-1 shadow-xl'
-                >
-                  Login
-                </button>
-              </a>
+              <button
+                type='submit'
+                className='text-white bg-[#707FDD] w-full text-center py-3 rounded-2xl  my-1 shadow-xl'
+              >
+                Login
+              </button>
             </form>
           </div>
         </div>
