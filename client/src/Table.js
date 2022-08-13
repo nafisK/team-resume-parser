@@ -6,7 +6,7 @@ export default function Table() {
   const [searchTerm, setSearchTerm] = useState('')
 
   return (
-    <div className='container flex justify-center mx-auto '>
+    <div className='container flex justify-center mx-auto bg-blue-300'>
       <div className='flex flex-col '>
         <div className='mb-3 w-full'>
           <div className='input-group relative flex flex-wrap items-stretch w-full mb-4'>
