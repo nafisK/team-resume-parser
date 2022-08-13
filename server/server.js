@@ -104,7 +104,9 @@ app.post('/upload', function (req, res) {
       let withoutPunctuation = result.text.replace(regex, '')
 
       // removes all \n from entire file
-      withoutPunctuation = withoutPunctuation.replace(/(\r\n|\n|\r)/gm, '')
+      withoutPunctuation = withoutPunctuation
+        .replace(/(\r\n|\n|\r)/gm, '')
+        .toLocaleLowerCase()
 
       // splits file into an array of words
       pdfArr = withoutPunctuation.split(' ')
