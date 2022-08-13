@@ -84,7 +84,7 @@ export default function AdminSideBar() {
             </li>
             <li>
               <a
-                href='/login'
+                href='/'
                 className='flex items-center p-2 text-base font-normal text-[#707FDD] rounded-lg  hover:bg-gray-100 '
               >
                 <LogoutIcon className='text-[#707FDD] w-6' />
