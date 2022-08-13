@@ -51,12 +51,12 @@ const DropFileInput = props => {
                 fileList.length > 0 ? (
                     <div className="drop-file-preview">
                         <p className="drop-file-preview__title">
-                            Ready to upload
+                            Ready to submit!
                         </p>
                         {
                             fileList.map((item, index) => (
                                 <div key={index} className="drop-file-preview__item">
-                                    <img src={"https://cdn2.iconfinder.com/data/icons/cloud-computing-storage/48/upload-file-512.png"} alt="" />
+                                    <img src={"https://static.vecteezy.com/system/resources/previews/002/205/865/original/employee-resume-icon-free-vector.jpg"} alt="" />
                                     <div className="drop-file-preview__item__info">
                                         <p>{item.name}</p>
                                         <p>{item.size}B</p>
