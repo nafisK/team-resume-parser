@@ -62,12 +62,12 @@ app.get('/login', async function (req, res) {
     const user = await User.findOne({ email: req.body.email })
     if (user) {
       if (await bcrypt.compare(req.body.password, user.password)) {
-        res.send({ message: "Login successful" })
+        res.send({ isLoggedin: true, message: "Login successful" })
       } else {
-        res.send({ message: "Incorrect password" })
+        res.send({ isLoggedin:false, message: "Incorrect password" })
       }
     } else {
-      res.send({ message: "Email does not exist" })
+      res.send({ isLoggedin: false, message: "Email does not exist" })
     }
   } catch (err) {
     res.send({ message: err })
