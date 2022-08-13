@@ -13,18 +13,22 @@ function Navbar() {
       <div className='px-2 flex justify-between items-center w-full h-full'>
         <div className='flex items-center ml-60 text-[#424B5A]'>
           <NewspaperIcon className='w-10 ' />
-          <h1 className='text-3cl font-bold mr-4 sm:text-4xl text-[#424B5A]'>
-            Resume Parser.
-          </h1>
+          <a href='/'>
+            <h1 className='text-3cl font-bold mr-4 sm:text-4xl text-[#424B5A]'>
+              Resume Parser.
+            </h1>
+          </a>
         </div>
 
         <div className='hidden md:flex pr-4 mr-60'>
-          <h4 className='border-none bg-transparent text-[#424B5A] font-bold mr-4 flex justify-center items-center'>
+          <a href='/login' className='border-none bg-transparent text-[#424B5A] font-bold mr-4 flex justify-center items-center'>
             Administrator Login
-          </h4>
-          <button className='px-8 py-3 bg-[#424B5A] text-white rounded-2xl'>
-            Sign Up
-          </button>
+          </a>
+          <a href='/register'>
+            <button className='px-8 py-3 bg-[#424B5A] text-white rounded-2xl'>
+              Sign Up
+            </button>
+          </a>
         </div>
 
         <div onClick={handleClick} className='md:hidden'>
@@ -41,7 +45,7 @@ function Navbar() {
           <button className='bg-transparent text-indigo-600 px-8 py-3 mb-4'>
             Sign In
           </button>
-          <button className='px-8 py-3'>Sign Up</button>
+          <button  className='px-8 py-3'>Sign Up</button>
         </div>
       </ul>
     </div>

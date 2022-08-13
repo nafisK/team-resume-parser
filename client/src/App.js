@@ -1,4 +1,4 @@
-import Register from './Register.js'
+import Register from './pages/Register.js'
 import Login from './pages/Login.js'
 import Home from './pages/Home.js'
 import Admin from './pages/Admin.js'

@@ -2,6 +2,7 @@ import { React, useEffect } from 'react'
 import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import axios from 'axios'
+import DropFileInput from '../components/DragDrop'
 
 export default function Home() {
   const [data, setData] = useState({
@@ -57,6 +58,15 @@ export default function Home() {
     <div className='flex justify-center items-center h-screen'>
       <div className='max-w-[1240px] mx-auto'>
         <div className='text-center'>
+
+          {/* @team The 'Upload your resume!' shifted up, don't know why */}
+
+          <br/>
+          <br/> 
+          <br/>
+          <br/>
+          <br/>
+          <br/>
           <h2 className='text-5xl font-bold text-[#424B5A]'>
             Upload your resume!
           </h2>
@@ -90,7 +100,8 @@ export default function Home() {
                 placeholder='Phone Number'
                 onChange={e => handleForm(e)}
               />
-              <input
+              <DropFileInput onFileChange={(file) => handleFile(file)} />
+              {/* <input
                 required
                 className='form-control block w-full px-6 py-3 rounded-3xl mb-4 text-base font-normal text-gray-700 bg-white bg-clip-padding 
                     border border-solid border-gray-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white 
@@ -98,12 +109,15 @@ export default function Home() {
                 type='file'
                 id='file'
                 onChange={e => handleFile(e)}
-              />
+              /> 
+              
+              @team: replaced old resume upload component with drag/drop*/}
+              <br/>
               <button
                 type='submit'
                 className='text-white bg-[#707FDD] w-6/12	 text-center py-3 rounded-2xl  my-1'
               >
-                Submit
+                SUBMIT
               </button>
               {submissionAlert && (
                 <div

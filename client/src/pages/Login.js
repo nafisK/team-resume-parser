@@ -14,7 +14,7 @@ const Login = () => {
 
   const handleSubmit = async e => {
     e.preventDefault()
-    // setSuccess(true)
+    setSuccess(true)
   }
 
   return (
@@ -22,10 +22,10 @@ const Login = () => {
       <div className='max-w-[1240px] mx-auto'>
         <div className='p-5'>
           <div className='text-center'>
-            <h2 className='text-5xl font-bold text-[#424B5A]'>Welcome Back</h2>
+            <h2 className='text-5xl font-bold text-[#424B5A]'>Welcome Back!</h2>
             <h4 className='text-[#424B5A] mt-4'>
               Sign in to keep track of all your applicants!
-            </h4>
+            </h4>   
           </div>
 
           <div className='py-9 md:grid-cols-3 gap-1 px-2 text-center'>
@@ -46,20 +46,21 @@ const Login = () => {
                 <LockClosedIcon className='w-8 flex justify-between items-center text-gray-500' />
                 <input
                   required
-                  type='text'
+                  type='password'
                   className='w-full p-3 ml-3 rounded-3xl pl-5'
                   placeholder='Password'
                   id='password'
                   onChange={e => console.log(e.target.value)}
                 />
               </div>
-
-              <button
-                type='submit'
-                className='text-white bg-[#707FDD] w-full text-center py-3 rounded-2xl  my-1 shadow-xl'
-              >
-                Login
-              </button>
+              <a href='/admin'>
+                <button
+                  type='submit'
+                  className='text-white bg-[#707FDD] w-full text-center py-3 rounded-2xl  my-1 shadow-xl'
+                >
+                  Login
+                </button>
+              </a>
             </form>
           </div>
         </div>
