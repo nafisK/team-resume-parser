@@ -1,8 +1,10 @@
 # HeadHunter.
 
-- HeadHunter is a full stack website that enables people to apply directly to many recruiter at once.
-- All users upload their resumes with past work experience and skills they are able to work it.
-- Recruiters/Administrators sign-up to Headhunter to get access to people who are seeking for new employment. They are able to see what skills are currently trending in the employment market, search for people with specific skills and also get access to their information to talk and reach out to them directly.
+- HeadHunter is a full stack website that enables users to apply directly to recruiter at multiple companies all at once.
+- All users/job-seekers upload their resumes with past work experience and skill-set they have acquired through previous experiences.
+- Recruiters/Administrators sign-up to Headhunter to get access to job-seekers. 
+  - They are able to see what skills are currently trending in the employment market
+  - Search for users with specific skills and get access to their information to talk to them directly.
 
 ---
 
@@ -22,6 +24,7 @@
   - pdfparse for parsing pdfs and analyzing data
   - Heroicons for icons
   - React Google Charts for creating charts
+  - express-fileupload for handling larger files
 
 ### Initial Sketch:👇
 
