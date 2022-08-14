@@ -9,6 +9,7 @@
 ---
 
 ## Development
+- To run this project, use `npm install` in both server and client directory. Then use `npm start` in the server folder and then follow up with `npm start` in the client folder to start the project. 
 
 ### Technology Stack:
 
