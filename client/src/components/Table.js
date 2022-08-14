@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export default function Table() {
   const [searchTerm, setSearchTerm] = useState('')
-  const [resumes, setResumes] = useState({})
+  const [resumes, setResumes] = useState([])
 
   useEffect(() => {
     axios
@@ -40,6 +40,7 @@ export default function Table() {
               type='text'
               className='px-4 py-2 w-80 rounded-3xl'
               placeholder='Search...'
+              onChange={event => setSearchTerm(event.target.value)}
             />
           </div>
         </div>
@@ -61,19 +62,14 @@ export default function Table() {
             </thead>
 
             <tbody className='bg-white'>
-              {/* {resumes.map(resume => (
-                <tr className=''>
-                  <td className='px-6 py-4 text-sm text-gray-500'>
-                    {resume._id.substring(1, 5)}
-                  </td>
-                  <td className='px-6 py-4'>{resume.author}</td>
-                  <td className='px-6 py-4'>{resume.email}</td>
-                  <td className='px-6 py-4'>{resume.number}</td>
-                  <td className='px-6 py-4'>{resume.appliedOn}</td>
-                  <td className='px-6 py-4'>🔗</td>
-                </tr>
-              ))} */}
-              {resumes.map(resume => (
+
+              {resumes.filter(val => {
+                    if (searchTerm === "") {
+                      return val
+                    } else if (val.content.includes(searchTerm)) {
+                      return val
+                    }
+                  }).map(resume => (
                 <tr className=''>
                   <td className='px-6 py-4 text-sm text-gray-500'>
                     {resume._id.substring(1, 5)}
@@ -85,6 +81,7 @@ export default function Table() {
                   <td className='px-6 py-4'>🔗</td>
                 </tr>
               ))}
+
             </tbody>
           </table>
         </div>
