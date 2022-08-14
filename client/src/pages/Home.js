@@ -3,8 +3,11 @@ import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import axios from 'axios'
 import DropFileInput from '../components/DragDrop'
+import toast, { Toaster } from 'react-hot-toast'
 
 export default function Home() {
+  const notify = () => toast.success('Uploaded Successfully!')
+
   const [data, setData] = useState({
     author: '',
     email: '',
@@ -43,6 +46,7 @@ export default function Home() {
       .then(function (response) {
         //handle success
         console.log(response)
+        notify()
       })
       .catch(function (response) {
         //handle error
@@ -119,6 +123,7 @@ export default function Home() {
             </form>
           </div>
         </div>
+        <Toaster />
       </div>
     </div>
   )
