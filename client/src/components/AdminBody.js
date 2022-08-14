@@ -7,16 +7,17 @@ import { Pie } from './Pie'
 export default function AdminBody() {
   const [resumes, setResumes] = useState({})
 
-  useEffect(() => {
-    axios
-      .get('http://localhost:3001/resumes')
-      .then(res => {
-        console.log(res)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }, [])
+  // useEffect(() => {
+  //   axios
+  //     .get('http://localhost:3001/resumes')
+  //     .then(res => {
+  //       setResumes(res.data)
+  //       console.log(resumes)
+  //     })
+  //     .catch(err => {
+  //       console.log(err)
+  //     })
+  // }, [])
 
   return (
     <div className='container mx-auto mt-40 '>

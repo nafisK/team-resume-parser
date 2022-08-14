@@ -6,18 +6,12 @@ import DropFileInput from '../components/DragDrop'
 
 export default function Home() {
   const [data, setData] = useState({
-    name: '',
+    author: '',
     email: '',
     number: '',
-    file: null,
-    resumeString: '',
-    created: new Date(),
   })
-  const [submissionAlert, setSubmissionAlert] = useState(false)
 
-  const handleClick = () => {
-    setSubmissionAlert(!submissionAlert)
-  }
+  const [file, setFile] = useState(null)
 
   const handleForm = e => {
     const newData = { ...data }
@@ -28,19 +22,32 @@ export default function Home() {
   const handleFile = event => {
     const newData = { ...data }
     const file = event.target.files[0]
-
-    const arr = ['', 'Tanvi', 'Rahman', 'tanvi.rahman@nyu.edu', '']
-
-    // setting actual file
-    newData['file'] = file
-    newData['resumeString'] = arr
-
-    setData(newData)
-    console.log(newData)
+    setFile(file)
   }
 
   const handleSubmit = async e => {
-    var fileUrl = ''
+    e.preventDefault()
+    const sampleFile = file
+    var bodyFormData = new FormData()
+    bodyFormData.append('author', data.author)
+    bodyFormData.append('email', data.email)
+    bodyFormData.append('number', data.number)
+    bodyFormData.append('sampleFile', sampleFile)
+
+    axios({
+      method: 'post',
+      url: '/upload',
+      data: bodyFormData,
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+      .then(function (response) {
+        //handle success
+        console.log(response)
+      })
+      .catch(function (response) {
+        //handle error
+        console.log(response)
+      })
   }
 
   useEffect(() => {
@@ -58,15 +65,12 @@ export default function Home() {
     <div className='flex justify-center items-center h-screen'>
       <div className='max-w-[1240px] mx-auto'>
         <div className='text-center'>
-
-          {/* @team The 'Upload your resume!' shifted up, don't know why */}
-
-          <br/>
-          <br/> 
-          <br/>
-          <br/>
-          <br/>
-          <br/>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
           <h2 className='text-5xl font-bold text-[#424B5A]'>
             Upload your resume!
           </h2>
@@ -81,7 +85,7 @@ export default function Home() {
                 type='text'
                 className='block border border-grey-light w-full p-3 mb-4 rounded-3xl pl-5'
                 placeholder='Full Name'
-                id='name'
+                id='author'
                 onChange={e => handleForm(e)}
               />
               <input
@@ -100,36 +104,18 @@ export default function Home() {
                 placeholder='Phone Number'
                 onChange={e => handleForm(e)}
               />
-              <DropFileInput onFileChange={(file) => handleFile(file)} />
-              {/* <input
-                required
-                className='form-control block w-full px-6 py-3 rounded-3xl mb-4 text-base font-normal text-gray-700 bg-white bg-clip-padding 
-                    border border-solid border-gray-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white 
-                    focus:border-blue-600 focus:outline-none'
-                type='file'
-                id='file'
-                onChange={e => handleFile(e)}
-              /> 
-              
-              @team: replaced old resume upload component with drag/drop*/}
-              <br/>
+              <DropFileInput
+                onFileChange={e => handleFile(e)}
+                setFile={setFile}
+                handleFile={handleFile}
+              />
+              <br />
               <button
                 type='submit'
                 className='text-white bg-[#707FDD] w-6/12	 text-center py-3 rounded-2xl  my-1'
               >
                 SUBMIT
               </button>
-              {submissionAlert && (
-                <div
-                  className='p-3 my-3 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800'
-                  role='alert'
-                >
-                  <span className='font-bold'>
-                    Resume successfully uploaded.
-                  </span>
-                </div>
-              )}
-              {/* </div> */}
             </form>
           </div>
         </div>

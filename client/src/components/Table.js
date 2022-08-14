@@ -47,6 +47,8 @@ export default function Table() {
                 <th className='px-6 py-2 text-xs text-gray-500'>Resume URL</th>
               </tr>
             </thead>
+
+            
             <tbody className='bg-white'>
               {data
                 .filter(val => {

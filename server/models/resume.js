@@ -4,6 +4,7 @@ const ResumeSchema = mongoose.Schema({
   filename: String,
   author: String,
   email: String,
+  number: String,
   appliedOn: {
     type: Date,
     default: Date.now,

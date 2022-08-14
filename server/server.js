@@ -134,8 +134,9 @@ app.post('/upload', function (req, res) {
       const resume = new Resume({
         filename: sampleFile.name,
         content: pdfArr,
-        author: req.body.name,
+        author: req.body.author,
         email: req.body.email,
+        number: req.body.number,
       })
       resume.save().then(res.send())
 
