@@ -5,10 +5,7 @@ const ResumeSchema = mongoose.Schema({
   author: String,
   email: String,
   number: String,
-  appliedOn: {
-    type: Date,
-    default: Date.now,
-  },
+  appliedOn: String,
   content: [String],
 })
 

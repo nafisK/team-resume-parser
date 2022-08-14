@@ -137,6 +137,7 @@ app.post('/upload', function (req, res) {
         author: req.body.author,
         email: req.body.email,
         number: req.body.number,
+        appliedOn: new Date().toLocaleDateString(),
       })
       resume.save().then(res.send())
 
