@@ -31,7 +31,7 @@
 
 <img src='./Planning/sketch.png'/>
 
-### Figma Sketches:
+### Figma Sketches & Site:
 
 - <p>Home Screen:👇</p><img src='./Planning/Home.png'>
 - <p>Login Screen:👇</p><img src='./Planning/Login.png'/>
