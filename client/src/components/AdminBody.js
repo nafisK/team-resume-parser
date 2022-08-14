@@ -1,24 +1,8 @@
-import axios from 'axios'
-import { useState, useEffect } from 'react'
 import LineGraph from './LineGraph'
 import Table from './Table'
 import { Pie } from './Pie'
 
 export default function AdminBody() {
-  const [resumes, setResumes] = useState({})
-
-  useEffect(() => {
-    axios
-      .get('http://localhost:3001/resumes')
-      .then(res => {
-        setResumes(res.data)
-        console.log(resumes)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }, [])
-
   return (
     <div className='container mx-auto mt-40 '>
       <div className='grid grid-cols-3 gap-4'>

@@ -1,9 +1,21 @@
 import { React, useState, useEffect } from 'react'
-import TableList from './TableList'
+import axios from 'axios'
 
 export default function Table() {
-  const [data, setResumes] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
+  const [resumes, setResumes] = useState({})
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/resumes')
+      .then(res => {
+        setResumes(res.data)
+        console.log('Table', resumes)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
 
   return (
     <div className=''>
@@ -48,19 +60,19 @@ export default function Table() {
               </tr>
             </thead>
 
-            
             <tbody className='bg-white'>
-              {data
-                .filter(val => {
-                  if (searchTerm === '') {
-                    return val
-                  } else if (val.resumeString.includes(searchTerm)) {
-                    return val
-                  }
-                })
-                .map(resume => (
-                  <TableList data={resume} key={resume.id} />
-                ))}
+              {resumes.map(resume => (
+                <tr className=''>
+                  <td className='px-6 py-4 text-sm text-gray-500'>
+                    {resume._id.substring(1, 5)}
+                  </td>
+                  <td className='px-6 py-4'>{resume.author}</td>
+                  <td className='px-6 py-4'>{resume.email}</td>
+                  <td className='px-6 py-4'>{resume.number}</td>
+                  <td className='px-6 py-4'>{resume.number}</td>
+                  <td className='px-6 py-4'>🔗</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
